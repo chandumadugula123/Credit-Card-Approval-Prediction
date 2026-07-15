@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Credit Card Approval Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <main class="shell">
+    <section class="intro">
+      <div>
+        <p class="eyebrow">Machine learning credit decisioning</p>
+        <h1>Credit Card Approval Prediction</h1>
+        <p class="lede">Screen applicants with a trained {{ model_name }} model using financial, demographic, and credit-risk signals.</p>
+      </div>
+      <div class="model-chip">
+        <span>Active model</span>
+        <strong>{{ model_name }}</strong>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <form id="approvalForm" class="form-panel">
+        <div class="panel-head">
+          <div>
+            <p class="eyebrow">Applicant profile</p>
+            <h2>New application</h2>
+          </div>
+          <button type="button" id="sampleButton">Fill sample</button>
+        </div>
+
+        <div class="field-grid">
+          <label>Gender<select name="gender" required><option>Female</option><option>Male</option></select></label>
+          <label>Income type<select name="income_type" required><option>Working</option><option>Commercial associate</option><option>Pensioner</option><option>Student</option></select></label>
+          <label>Education<select name="education" required><option>Higher education</option><option>Secondary</option><option>Incomplete higher</option></select></label>
+          <label>Family status<select name="family_status" required><option>Married</option><option>Single</option><option>Separated</option></select></label>
+          <label>Housing type<select name="housing_type" required><option>House</option><option>Rented apartment</option><option>With parents</option></select></label>
+          <label>Employment status<select name="employment_status" required><option>Employed</option><option>Self-employed</option><option>Unemployed</option></select></label>
+          <label>Annual income<input name="annual_income" type="number" min="0" step="100" value="72000" required></label>
+          <label>Employment years<input name="employment_years" type="number" min="0" max="50" step="0.5" value="6" required></label>
+          <label>Age<input name="age" type="number" min="18" max="100" value="35" required></label>
+          <label>Credit history years<input name="credit_history_years" type="number" min="0" max="60" step="0.5" value="5" required></label>
+          <label>Existing loan balance<input name="existing_loan_balance" type="number" min="0" step="100" value="12000" required></label>
+          <label>Credit inquiries<input name="credit_inquiries" type="number" min="0" max="30" value="2" required></label>
+          <label>Past-due count<input name="past_due_count" type="number" min="0" max="30" value="0" required></label>
+        </div>
+
+        <button class="submit-button" type="submit">Predict approval</button>
+      </form>
+
+      <aside class="result-panel" id="resultPanel">
+        <p class="eyebrow">Decision output</p>
+        <h2 id="decisionTitle">Awaiting applicant</h2>
+        <p id="decisionText">Submit the profile to receive an approval or rejection prediction.</p>
+        <div class="confidence">
+          <span>Confidence</span>
+          <strong id="confidenceValue">--</strong>
+        </div>
+        <div class="risk-notes">
+          <h3>Review signals</h3>
+          <ul>
+            <li>High past-due counts reduce approval likelihood.</li>
+            <li>Large outstanding balances increase repayment risk.</li>
+            <li>Stable employment and longer credit history improve the score.</li>
+          </ul>
+        </div>
+      </aside>
+    </section>
+  </main>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
